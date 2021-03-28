@@ -44,42 +44,13 @@ SDL_BlitSurface(b->background,&b->camera,screen,NULL);
 
 
 
-/*
-void scrolling (background *b,SDL_Surface *screen);
-{
-while (SDL_PollEvent(&event))
-{
-switch(event.type)
-{ 
-case SDL_KEYLEFT:
-(event.key.keysym.sym==SDLK_LEFT)
-camera_pos.x--
-break;
-
-case SDL_KEYRIGHT:
-(event.key.keysym.sym==SDLK_RIGHT)
-camera_pos.x++
-break ; 
-
-case SDL_KEYUP:
-(event.key.keysym.sym==SDLK_UP)
-camera_pos.y--
-break ; 
-
-case SDL_KEYDOWN:
-(event.key.keysym.sym==SDLK_DOWN)
-camera_pos.y++
-break ; 
-}
-}
-   }*/
 
 
-void scrollToLeft (background * b){
+void scroll_Left (background * b){
 if (b->backg.x != 0)
 b->backg.x--;
 }
-void scrollToRight (background * b){
+void scroll_Right (background * b){
 if (b->backg.w - b->backg.x != CAMERA_W)
 b->backg.x++;
 }
