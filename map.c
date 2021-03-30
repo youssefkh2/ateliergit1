@@ -16,6 +16,7 @@ void loadMap(char *map1)
 
 		exit(1);
 	}
+	else
 
 
 	map.maxX = map.maxY = 0;
