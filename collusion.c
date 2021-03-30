@@ -91,11 +91,12 @@ bool collision1(SDL_Surface *screen,int x,int y)
 Uint32 blanc=SDL_MapRGB(screen->format,255,255,255);
 if(getpixel(screen,x,y)==blanc)
 return true;
+else
 return false ;
 }
 /*************************************************************************************************************/
 /*************************************************************************************************************/
-bool collision2(SDL_Surface *screen,int x,int y)
+/*bool collision2(SDL_Surface *screen,int x,int y)
 {
 Uint32 noir=SDL_MapRGB(screen->format,0,0,0);
 if(getpixel(screen,x,y)==noir)
@@ -103,7 +104,7 @@ if(getpixel(screen,x,y)==noir)
 return true;
 }else
 return false ;
-}
+}*/
 /*************************************************************************************************************/
 /*************************************************************************************************************/
 int collisiongravite (SDL_Surface *screen,SDL_Rect *rect)
