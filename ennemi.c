@@ -4,9 +4,9 @@
 void initEnnemi(Ennemi *e)
 {
     Uint16 largeur, hauteur;
-    e->img = IMG_Load("ressources/sonic4.png");
+    e->img = IMG_Load("taswira.png");
     if (!e->img) {
-        printf("Failed to load \"%s\"\n", "ressources/sonic4.png");
+        printf("Failed to load \"%s\"\n", "taswira.png");
         printf("IMG_Load: %s\n", IMG_GetError());
     }
 
