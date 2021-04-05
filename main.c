@@ -3,115 +3,131 @@
 #include "perso.h"
 
 int main()
-{ 
-Uint32 dt, t_prev;
-Personnage p;
-int i,j=0;
+{
+    Uint32 dt, t_prev;
+    Personnage p;
+    int i,j=0;
 
-SDL_Event event;
-SDL_Surface *screen;
-char niveau;////play ou option ou exit
+    SDL_Event event;
+    SDL_Surface *screen;
+    char niveau;////play ou option ou exit
 //screen
- screen=SDL_SetVideoMode(1500,1000,32,SDL_HWSURFACE|SDL_DOUBLEBUF);
+    screen=SDL_SetVideoMode(1500,1000,32,SDL_HWSURFACE|SDL_DOUBLEBUF);
     if(screen==NULL)
     {
         printf("Unable to set video mode : %s",SDL_GetError());
         return 1;
     }
 //init police
-if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER )!=0)
+    if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER )!=0)
     {
         printf("Unable to inizialize SDL: %s \n",SDL_GetError());
         return 1;
     }
     TTF_Init();
-    police = TTF_OpenFont("/usr/share/fonts/truetype/Nakula/nakula.ttf",40);  
-do 
-{int test=0;
-i=p->ligne;
-j=p->colonne;
-t_prev=SDL_GetTicks();	//au début de la boucle de jeu
-initPerso(&p);
-switch(niveau)
-{ 
-case 'play':
-afficherPerso( p, &screen);
-while(SDL_PollEvent(&event))
+    police = TTF_OpenFont("/usr/share/fonts/truetype/Nakula/nakula.ttf",40);
+    do
+    {
+        int test=0;
+        i=p.ligne;
+        j=p.colonne;
+        t_prev=SDL_GetTicks();	//au début de la boucle de jeu
+        initPerso(&p);
+        switch(niveau)
         {
-            switch (event.type)
-         {
-             case SDL_KEYDOWN:
-              //deplacement du clavier down
-       if(j==7)
-        j=0;
-               if(event.key.keysym.sym==SDLK_RIGHT)
+        case 'play':
+            afficherPerso( p, &screen);
+            while(SDL_PollEvent(&event))
+            {
+                switch (event.type)
                 {
-                    i=0;
+                case SDL_KEYDOWN:
+                    //deplacement du clavier down
+                    if(j==7)
+                        j=0;
+                    if(event.key.keysym.sym==SDLK_RIGHT)
+                    {
+                        i=0;
               
-                }//fin if
-else if(event.key.keysym.sym==SDLK_a)
-{
-movePerso(&p,dt);
+                        p.numvie=0;
+                        p.score=0;
 
-}
-else if(event.key.keysym.sym==SDLK_d)
-{  i=0;
+                    }//fin if
+                    else if(event.key.keysym.sym==SDLK_a)
+                    {
+                        p.acceleration=20;
 
-}//fin if
-j=0;
-else if(event.key.keysym.sym==SDLK_LEFT)
-{ i=1;
+                    }
+                    else if(event.key.keysym.sym==SDLK_d)
+                    {
+                        i=0;
 
-}//fin if
-                   
-else if(event.key.keysym.sym==SDLK_q)
-{ i=1;
+                    }//fin if
+                    j=0;
+                    else if(event.key.keysym.sym==SDLK_LEFT)
+                    {
+                        i=1;
 
-}//fin if
-else if(event.key.keysym.sym==SDLK_z)
-{  i=2;
+                    }//fin if
 
-}//fin if
-else if(event.key.keysym.sym==SDLK_UP)
-{  i=2;
+                    else if(event.key.keysym.sym==SDLK_q)
+                    {
+                        i=1;
 
-}//fin if
+                    }//fin if
+                    else if(event.key.keysym.sym==SDLK_z)
+                    {
+                        i=2;
 
-deplacerPerso (&p);
-break;
-                   
-              case SDL_KEYUP:
-if(event.key.keysym.sym==SDLK_a)
-p->vitesse=5;
-p->acceleration=0;
-  else if(event.key.keysym.sym==SDLK_RIGHT)
-             {i=0;
-               j=0;}
- else if(event.key.keysym.sym==SDLK_d)
-             {i=0;
-               j=0;}
-else if(event.key.keysym.sym==SDLK_LEFT)
+                    }//fin if
+                    else if(event.key.keysym.sym==SDLK_UP)
+                    {
+                        i=2;
 
-            {i=1;
-               j=0;}
-else if(event.key.keysym.sym==SDLK_q)
+                    }//fin if
 
-            {i=1;
-               j=0;}
+                    movePerso(&p, dt) ;
+                    break;
 
-deplacerPerso (&p);
-break;
-break;
+                case SDL_KEYUP:
+                    if(event.key.keysym.sym==SDLK_a)
+                        p.vitesse=5;
+                    p.acceleration=0;
+                    else if(event.key.keysym.sym==SDLK_RIGHT)
+                    {
+                        i=0;
+                        j=0;
+                    }
+                    else if(event.key.keysym.sym==SDLK_d)
+                    {
+                        i=0;
+                        j=0;
+                    }
+                    else if(event.key.keysym.sym==SDLK_LEFT)
 
-case 'option':
-break;
+                    {
+                        i=1;
+                        j=0;
+                    }
+                    else if(event.key.keysym.sym==SDLK_q)
 
-case 'exit' :
-test=1;
-break;
+                    {
+                        i=1;
+                        j=0;
+                    }
+                    p.acceleration%2==1;
 
-}//fin swtich
-            
+                    break;
+                    break;
+
+                case 'option':
+                    break;
+
+                case 'exit' :
+                    test=1;
+                    break;
+
+                }//fin swtich
 
 
 
@@ -119,16 +135,19 @@ break;
 
 
 
-dt=SDL_GetTicks()-t_prev;	//à la fin de la boucle de jeu
-}while(test=1)
-//fin bloucle do 
- SDL_FreeSurface(imageP[0][0]);
-    SDL_FreeSurface(exit);
-    SDL_FreeSurface(continu);
-SDL_Delay(10); 
- TTF_CloseFont(police);
-    TTF_Quit();
-   
-    SDL_Quit();
- return 0;
-}
+
+                dt=SDL_GetTicks()-t_prev;	//à la fin de la boucle de jeu
+            }
+            while(test=1)
+//fin bloucle do
+                SDL_FreeSurface(imageP[0][0]);
+            SDL_FreeSurface(exit);
+            SDL_FreeSurface(continu);
+            SDL_Delay(10);
+            TTF_CloseFont(police);
+            TTF_Quit();
+
+            SDL_Quit();
+            return 0;
+        }
+
