@@ -18,7 +18,7 @@ int state;
 
 
 void initEnnemi(Ennemi *e);
-void afficherEnnemie (Ennemi *e,SDL_Surface *screen);
+void afficherEnnemie (Ennemi e,SDL_Surface *screen);
 void animerEnnemi(Ennemi *e);
 void deplacer(Ennemi *e);//deplacement aleatoire
 int collisionBB(personne p,Ennemi e);
