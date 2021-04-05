@@ -11,11 +11,16 @@ void initEnnemi(Ennemi *e)
     }
 
     largeur = e->img->w / nbAnimationFrames;
-    hauteur = e->img->h;
+    hauteur = e->img->h/2;
 
-    e->pos = (SDL_Rect){ .x = 0, .y = 0, .w = width, .h = height };
-
-    e->animFrame = (SDL_Rect){ .x = 0, .y = 0, .w = largeur, .h = hauteur };
+    e->pos.x = 0;
+    e->pos.y = 0;
+    
+    e->animFrame .x = 0;
+     e->animFrame .y = 0;
+     e->animFrame .w = largeur;
+     e->animFrame .h = hauteur;
+   
 
     e->direction = 0;
 
@@ -23,7 +28,7 @@ void initEnnemi(Ennemi *e)
 }
 
 //******************************************/
-void afficherEnnemie (Ennemi *e,SDL_Surface *screen)
+void afficherEnnemie (Ennemi e,SDL_Surface *screen)
 {
      SDL_FillRect(screen, &e.pos, SDL_MapRGB(e.img->format, 0, 0, 0));
      SDL_BlitSurface(e.img, &(e.animFrame), screen, &e.pos);
@@ -31,11 +36,11 @@ void afficherEnnemie (Ennemi *e,SDL_Surface *screen)
 //************************************/
 void animerEnnemi(Ennemi *e)
 {
-e->pos.y =e->direction;//(se positionner dans la ligne correspondant a la direction)
-if( e->pos.x = e->img->w - e->pos.w )//(si dernier frame atteint)
-    e->pos.x =0;//(revenir au premier frame)
+e->animFrame.y =e->direction*e->animFrame.h;//(se positionner dans la ligne correspondant a la direction)
+if( e->animFrame.x = e->img->w - e->animFrame.w )//(si dernier frame atteint)
+    e->animFrame.x =0;//(revenir au premier frame)
 else
-    e->pos.x = e->pos.x + e->pos.w; //(avancer au frame suivant)
+    e->animFrame.x = e->animFrame.x + e->animFrame.w; //(avancer au frame suivant)
 
 }
 //**************************************************/
