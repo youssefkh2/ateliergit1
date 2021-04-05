@@ -5,7 +5,8 @@ typedef struct
 {
  SDL_Surface *imageP[3][7];//////ça depend kadeh men taswiraa 
 SDL_Rect posP;
-SDL_Surface imgVie[4];
+SDL_Surface *imgVie[4];
+int numvie;
 SDL_Rect posV;
 int ligne;
 int colonne;
@@ -16,7 +17,6 @@ double vitesse, acceleration,vitesse_max_perso;
 
 void initPerso(Personne *p);
 void afficherPerso(Personne p, SDL_Surface * screen);
-void deplacerPerso (Personne *p);
 void movePerso(Perso *p,Uint32 dt) ;
 void animerPerso (Personne* p);
 void saut (Personne* p);
