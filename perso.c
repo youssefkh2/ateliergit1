@@ -50,16 +50,18 @@ void initPerso(Personne *p)
 
 }
 
-void afficherPerso(Personne p, SDL_Surface * screen)
-{
+void afficherPerso(Personne p, SDL_Surface * screen, TTF_Font *police)
+{//police
     SDL_Color couleur= {255,255,255};
     SDL_Surface *texte;
+SDL_Rect positiontexte;
     int x,y;
+	char ch[10];
     SDL_BlitSurface(p.imageP[p.ligne][p.colonne],NULL,screen,&p.posP);
     SDL_BlitSurface(p.imgVie[p.numvie],NULL,screen,&p.posV);
 
-    printf("score= %d ",p.score);
-    texte = TTF_RenderText_Blended(police, "?", couleur);//score yetbadel printf..
+    sprintf(ch, "score= %d ",p.score);
+    texte = TTF_RenderText_Blended(police, ch , couleur);
     positiontexte.x = 500;
     positiontexte.y =100;
 
@@ -69,17 +71,6 @@ void afficherPerso(Personne p, SDL_Surface * screen)
 }
 void movePerso(Perso *p,Uint32 dt)
 {
-
-    if (p->acceleration%2==0)
-        p->vitesse=5;
-    if(p->acceleration%2==1)
-    {
-        if(p->vitesse<p->vitesse_max_perso)
-        {
-            p->acceleration+=46;
-            p->vitesse+=0.5*p->acceleration*dt/1000*dt/1000+p->vitesse*dt/1000;
-        }
-    }
     int i,j;
     i=p->ligne;
     j=p->colonne;
@@ -88,57 +79,41 @@ void movePerso(Perso *p,Uint32 dt)
 
     //deplacement du clavier down
     if(i==0)
-    {
-        posP.x+=30;
-      animerPerso (&p);
-         j++;
+    {    p->vitesse+=p->acceleration*dt;
+        p->posP.x+=0.5*p->acceleration*dt*dt+p->vitesse*dt;
+      
+        
 
     }//fin if
 
-    j=0;
+    
     else if(i==1)
-    {
-        posP.x-=30;
-       animerPerso (&p);
-        j++;
-
-
+    { p->vitesse+=p->acceleration*dt;
+        p->posP.x-=0.5*p->acceleration*dt*dt+p->vitesse*dt;
+    
     }//fin if
 
 
-    else if(i==2)
-    {posP.x+=30;
-        animerPerso (&p);
-        j++;
-    }//fin if
+    /*else if(i==2)
+    { p->vitesse+=p->acceleration*dt;
+        p->posP.x+=0.5*p->acceleration*dt*dt+p->vitesse*dt;
+    }//fin if*/
 
 
 case SDL_KEYUP:
-    if(i==0 && j==0)
+    if(i==0 )
     {
-        animerPerso (&p);
+        p->vitesse+=p->acceleration*dt;
+        p->posP.x-=0.5*p->acceleration*dt*dt+p->vitesse*dt;
     }
 
-    else if(i==1 && j==0)
-
-    {
-       animerPerso (& p);
-    }
-
-
-
-
-
-
-
+   
 }
 void animerPerso (Personne* p)
-{ SDL_Surface *screen;
-
-SDL_BlitSurface(p->imageP[p->ligne][p->colonne],&positionecran,screen,&p.posP);
-        
-        SDL_Flip(screen);
-
+{ if(p->colonne==6)
+  p->colonne=0;
+else
+p->colonne++;
 
 }
 
