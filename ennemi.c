@@ -54,7 +54,7 @@ if (e->pos.x> PosMax)
 else (e->pos.x<PosMin)
     e->direction=0;
 
-if (e->direction=0)
+if (e->direction==0)
     e->pos.x++ ;
 else
     e->pos.x-- ;
