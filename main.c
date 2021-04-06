@@ -7,7 +7,7 @@ int main()
     Uint32 dt, t_prev;
     Personnage p;
     int i,j=0;
-
+   TTF_Font *police = NULL;
     SDL_Event event;
     SDL_Surface *screen;
     char niveau;////play ou option ou exit
@@ -19,6 +19,8 @@ int main()
         return 1;
     }
 //init police
+
+
     if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER )!=0)
     {
         printf("Unable to inizialize SDL: %s \n",SDL_GetError());
@@ -35,8 +37,19 @@ int main()
         initPerso(&p);
         switch(niveau)
         {
-        case 'play':
-            afficherPerso( p, &screen);
+        case 'P':
+            afficherPerso( p, &screen,&police);
+           if(p.vitesse>0)
+         p.acceleration=-0.001;
+         j++;
+          if(p.vitesse<0)
+        
+            p.acceleration=0;
+            p.vitesse=0;
+           p.ligne=0;
+           p.colonne=0;
+            
+         
             while(SDL_PollEvent(&event))
             {
                 switch (event.type)
@@ -48,82 +61,53 @@ int main()
                     if(event.key.keysym.sym==SDLK_RIGHT)
                     {
                         i=0;
+                         p.acceleration+=0.005;
+                         
               
-                        p.numvie=0;
-                        p.score=0;
+                       
 
                     }//fin if
-                    else if(event.key.keysym.sym==SDLK_a)
-                    {
-                        p.acceleration=20;
-
-                    }
-                    else if(event.key.keysym.sym==SDLK_d)
-                    {
-                        i=0;
-
-                    }//fin if
-                    j=0;
+                    
+                   
                     else if(event.key.keysym.sym==SDLK_LEFT)
                     {
                         i=1;
+                         p.acceleration-=0.01;
+                        if(p.vitesse<0)
+                        { p.ligne=1;
+                        p.colonne=0;}
 
                     }//fin if
 
-                    else if(event.key.keysym.sym==SDLK_q)
-                    {
-                        i=1;
-
-                    }//fin if
-                    else if(event.key.keysym.sym==SDLK_z)
-                    {
-                        i=2;
-
-                    }//fin if
-                    else if(event.key.keysym.sym==SDLK_UP)
-                    {
-                        i=2;
-
-                    }//fin if
+                   
+                   
+                   
 
                     movePerso(&p, dt) ;
+                    animerPerso (& p);
                     break;
 
                 case SDL_KEYUP:
-                    if(event.key.keysym.sym==SDLK_a)
-                        p.vitesse=5;
-                    p.acceleration=0;
+                    
                     else if(event.key.keysym.sym==SDLK_RIGHT)
                     {
                         i=0;
-                        j=0;
+                        p.acceleration-=0.001;
                     }
-                    else if(event.key.keysym.sym==SDLK_d)
-                    {
-                        i=0;
-                        j=0;
-                    }
-                    else if(event.key.keysym.sym==SDLK_LEFT)
-
-                    {
-                        i=1;
-                        j=0;
-                    }
-                    else if(event.key.keysym.sym==SDLK_q)
-
-                    {
-                        i=1;
-                        j=0;
-                    }
-                    p.acceleration%2==1;
+                      movePerso(&p, dt) ;
+                    animerPerso (& p);
+                   
+                   
+                   
+                   
 
                     break;
                     break;
 
-                case 'option':
+                case 'o':
                     break;
 
-                case 'exit' :
+                case 'e' :
                     test=1;
                     break;
 
