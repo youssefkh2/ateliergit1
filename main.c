@@ -1,13 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include"SDL/SDL.h"
 #include "perso.h"
+#include <SDL/SDL_ttf.h>
+#include <SDL/SDL_image.h>
 
 int main()
 {
     Uint32 dt, t_prev;
-    Personnage p;
+    Personne p;
     int i,j=0;
     int x,y;
+     int test=0;
     int FPS;
    TTF_Font *police = NULL;
     SDL_Event event;
@@ -32,7 +36,7 @@ int main()
     police = TTF_OpenFont("/usr/share/fonts/truetype/Nakula/nakula.ttf",40);
     do
     {
-        int test=0;
+       
         i=p.ligne;
         j=p.colonne;
         t_prev=SDL_GetTicks();	//au début de la boucle de jeu
@@ -40,7 +44,7 @@ int main()
         switch(niveau)
         {
         case 'P':
-            afficherPerso( p, &screen,&police);
+            afficherPerso( p, screen,police);
            if(p.vitesse>0)
          p.acceleration=-0.001;
          j++;
@@ -58,7 +62,7 @@ int main()
                 {
                 case SDL_KEYDOWN:
                     //deplacement du clavier down
-                    if(j==7)
+                    if(j==3)
                         j=0;
                     if(event.key.keysym.sym==SDLK_RIGHT)
                     {
@@ -83,7 +87,7 @@ int main()
 
                     else if(event.key.keysym.sym==SDLK_UP)
                     {
-                       saut(& p, dt, p.posP.y)
+                       saut(& p, dt, p.posP.y);
 
 
                      }
@@ -96,7 +100,7 @@ int main()
 
                 case SDL_KEYUP:
                     
-                    else if(event.key.keysym.sym==SDLK_RIGHT)
+                    if(event.key.keysym.sym==SDLK_RIGHT)
                     {
                         i=0;
                         p.acceleration-=0.001;
@@ -109,6 +113,7 @@ int main()
                    
 
                     break;
+}///switch thenia
                     break;
 
                 case 'o':
@@ -118,7 +123,8 @@ int main()
                     test=1;
                     break;
 
-                }//fin swtich
+                }//fin while
+}///fin switch loula
 
 
 
@@ -130,12 +136,10 @@ int main()
                 dt=SDL_GetTicks()-t_prev;	//à la fin de la boucle de jeu
             if(1000/FPS > dt)
             SDL_Delay(1000/FPS -dt);
-            }
-            while(test=1)
+            }while(test=1);
 //fin bloucle do
-                SDL_FreeSurface(imageP[0][0]);
-            SDL_FreeSurface(exit);
-            SDL_FreeSurface(continu);
+                SDL_FreeSurface(p.imageP[0][0]);
+           
             SDL_Delay(10);
             TTF_CloseFont(police);
             TTF_Quit();
