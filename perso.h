@@ -10,6 +10,7 @@ int numvie;
 SDL_Rect posV;
 int ligne;
 int colonne;
+int up;
 int score;
 double vitesse, acceleration,vitesse_max_perso;
 }Personne;
