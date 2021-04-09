@@ -46,7 +46,7 @@ void initPerso(Personne *p)
     p->colonne=0;
     p->vitesse=5;
     p->acceleration=0;
-    p->vitesse_max_perso=20;///mouch suur !!
+    p->up=0;
 
 }
 
@@ -109,12 +109,23 @@ case SDL_KEYUP:
 
    
 }
-void animerPerso (Personne* p)
+void animerPerso(Personne* p)
 { if(p->colonne==6)
   p->colonne=0;
 else
 p->colonne++;
 
+}
+void saut(Personne* p,int dt,int posinit)
+{int x,y;
+if(p->posP.y==40)
+{
+p->posP.y-=10;
+ if(p->posP.y!=posinit)
+p->posP.x=0.5*p->acceleration*dt*dt+p->vitesse*dt;
+}///fin if
+if(p->posP.y==posinit)
+p->up=0;
 }
 
 
