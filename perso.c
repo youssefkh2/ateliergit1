@@ -1,23 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "perso.h"
+#include <SDL/SDL_ttf.h>
 void initPerso(Personne *p)
 {
     int x,y;
     p->imageP[0][0]=IMG_Load("0.png");//right
     p->imageP[0][1]=IMG_Load("1.png");
     p->imageP[0][2]=IMG_Load("2.png");
-    p->imageP[0][3]=IMG_Load("3.png");
-    p->imageP[0][4]=IMG_Load("4.png");
-    p->imageP[0][5]=IMG_Load("5.png");
-    p->imageP[0][6]=IMG_Load("6.png");
-    p->imageP[1][0]=IMG_Load("7.png");//left
-    p->imageP[1][1]=IMG_Load("8.png");
-    p->imageP[1][2]=IMG_Load("9.png");
-    p->imageP[1][3]=IMG_Load("10.png");
-    p->imageP[1][4]=IMG_Load("11.png");
-    p->imageP[1][5]=IMG_Load("12.png");
-    p->imageP[1][6]=IMG_Load("13.png");
+    p->imageP[1][0]=IMG_Load("3.png");//left
+    p->imageP[1][1]=IMG_Load("4.png");
+    p->imageP[1][2]=IMG_Load("5.png");
     p->imageP[2][0]=IMG_Load("14.png");//lfouk
     p->imageP[2][1]=IMG_Load("15.png");
     p->imageP[2][2]=IMG_Load("16.png");
@@ -25,13 +18,7 @@ void initPerso(Personne *p)
     p->imageP[2][4]=IMG_Load("18.png");
     p->imageP[2][5]=IMG_Load("19.png");
     p->imageP[2][6]=IMG_Load("20.png");
-    p->imageP[3][0]=IMG_Load("21.png");//louta
-    p->imageP[3][1]=IMG_Load("22.png");
-    p->imageP[3][2]=IMG_Load("23.png");
-    p->imageP[3][3]=IMG_Load("24.png");
-    p->imageP[3][4]=IMG_Load("25.png");
-    p->imageP[3][5]=IMG_Load("26.png");
-    p->imageP[3][6]=IMG_Load("27.png");
+   
     p->posP.x=0;
     p->posP.y=500;
     p->imgVie[0]=IMG_Load("vie3.png");
@@ -69,7 +56,7 @@ SDL_Rect positiontexte;
 
 
 }
-void movePerso(Perso *p,Uint32 dt)
+void movePerso(Personne *p,Uint32 dt)
 {
     int i,j;
     i=p->ligne;
@@ -110,7 +97,7 @@ case SDL_KEYUP:
    
 }
 void animerPerso(Personne* p)
-{ if(p->colonne==6)
+{ if(p->colonne==3)
   p->colonne=0;
 else
 p->colonne++;
