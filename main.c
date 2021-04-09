@@ -7,6 +7,8 @@ int main()
     Uint32 dt, t_prev;
     Personnage p;
     int i,j=0;
+    int x,y;
+    int FPS;
    TTF_Font *police = NULL;
     SDL_Event event;
     SDL_Surface *screen;
@@ -79,7 +81,12 @@ int main()
 
                     }//fin if
 
-                   
+                    else if(event.key.keysym.sym==SDLK_UP)
+                    {
+                       saut(& p, dt, p.posP.y)
+
+
+                     }
                    
                    
 
@@ -121,6 +128,8 @@ int main()
 
 
                 dt=SDL_GetTicks()-t_prev;	//à la fin de la boucle de jeu
+            if(1000/FPS > dt)
+            SDL_Delay(1000/FPS -dt);
             }
             while(test=1)
 //fin bloucle do
