@@ -1,7 +1,7 @@
 #ifndef background_H_INCLUDED
 #define background_H_INCLUDED
-#define CAMERA_W 100
-#define CAMERA_H 200
+#define CAMERA_W 811  
+#define CAMERA_H 555
 
 
 #include <stdio.h>
@@ -16,19 +16,17 @@
 typedef struct 
 {
 SDL_Surface *background;
-SDL_Rect backg;
+SDL_Rect pos;
+Mix_Music *music;
+SDL_Rect pos_camera;
 
 }background;
 
 
 void initialiser_backround (background *b);
 void afficher_background (SDL_Surface *screen,background *b);
-void scrolling_right (background *b);
-void scrolling_left (background *b);
-void scrolling_up (background *b);
-void scrolling_down (background *b);
+void scroll (SDL_Rect * back, int direction );
 
 
-
- #endif
+ #endif	
 
