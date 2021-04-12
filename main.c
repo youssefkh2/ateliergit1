@@ -9,6 +9,7 @@ int main (int argc, char *argv[])
 background b;
 SDL_Event event;
 SDL_Surface *screen;
+   perso p ; 
 
 
 if (SDL_Init (SDL_INIT_VIDEO) == -1) {
