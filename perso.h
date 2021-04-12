@@ -1,6 +1,10 @@
-#ifndef AGENCE_H_INCLUDED
-#define AGENCE_H_INCLUDED
+#include <stdlib.h>
+#include <stdio.h>
+#include <SDL/SDL_image.h>
+#include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
+
+
 typedef struct 
 {
  SDL_Surface *imageP[3][3];
@@ -12,7 +16,7 @@ int ligne;
 int colonne;
 int up;
 int score;
-double vitesse, acceleration,vitesse_max_perso;
+double vitesse, acceleration;
 }Personne;
 
 
@@ -21,4 +25,4 @@ void afficherPerso(Personne p, SDL_Surface * screen, TTF_Font *police);
 void movePerso(Personne *p,Uint32 dt) ;
 void animerPerso (Personne* p);
 void saut(Personne* p,int dt,int posinit);
-#endif // AGENCE_H_INCLUDED
+
