@@ -2,8 +2,16 @@
 #include <stdlib.h>
 #include"SDL/SDL.h"
 #include "perso.h"
+#include <math.h>
 #include <SDL/SDL_ttf.h>
 #include <SDL/SDL_image.h>
+ 
+/*#define initPerso
+#define afficherPerso
+#define saut
+#define movePerso 
+#define animerPerso*/
+
 
 int main()
 {
@@ -16,9 +24,11 @@ int main()
    TTF_Font *police = NULL;
     SDL_Event event;
     SDL_Surface *screen;
+   SDL_Surface *background;
+SDL_Rect positionecran;
     char niveau;////play ou option ou exit
 //screen
-    screen=SDL_SetVideoMode(1500,1000,32,SDL_HWSURFACE|SDL_DOUBLEBUF);
+    screen=SDL_SetVideoMode(1500,1000,32,SDL_HWSURFACE|SDL_DOUBLEBUF);///1500,1000
     if(screen==NULL)
     {
         printf("Unable to set video mode : %s",SDL_GetError());
@@ -34,16 +44,29 @@ int main()
     }
     TTF_Init();
     police = TTF_OpenFont("/usr/share/fonts/truetype/Nakula/nakula.ttf",40);
+
+///background
+background=IMG_Load("background.png");
+    if(background==NULL)
+    {
+        printf("Unable to load bitmap: %s\n",SDL_GetError());
+        return 1;
+    }
+    SDL_BlitSurface(background,NULL,screen,&positionecran);
+      SDL_Flip(screen);   
+    positionecran.x=-750;
+    positionecran.y=-500;
+    positionecran.w=background->w;
     do
     {
-       
+         SDL_BlitSurface(background,NULL,screen,&positionecran);
         i=p.ligne;
         j=p.colonne;
         t_prev=SDL_GetTicks();	//au début de la boucle de jeu
         initPerso(&p);
-        switch(niveau)
+        /*switch(niveau)
         {
-        case 'P':
+        case 'P':*/
             afficherPerso( p, screen,police);
            if(p.vitesse>0)
          p.acceleration=-0.001;
@@ -92,7 +115,7 @@ int main()
 
                      }
                    
-                   
+              
 
                     movePerso(&p, dt) ;
                     animerPerso (& p);
@@ -105,26 +128,27 @@ int main()
                         i=0;
                         p.acceleration-=0.001;
                     }
+                     
                       movePerso(&p, dt) ;
                     animerPerso (& p);
                    
                    
-                   
+                   SDL_Flip(screen);
                    
 
                     break;
 }///switch thenia
-                    break;
+                    /*break;
 
                 case 'o':
                     break;
 
                 case 'e' :
                     test=1;
-                    break;
+                    break;*/
 
                 }//fin while
-}///fin switch loula
+//}///fin switch loula
 
 
 
@@ -134,8 +158,8 @@ int main()
 
 
                 dt=SDL_GetTicks()-t_prev;	//à la fin de la boucle de jeu
-            if(1000/FPS > dt)
-            SDL_Delay(1000/FPS -dt);
+           /* if(1000/FPS > dt)
+            SDL_Delay(1000/FPS -dt);*/
             }while(test=1);
 //fin bloucle do
                 SDL_FreeSurface(p.imageP[0][0]);
