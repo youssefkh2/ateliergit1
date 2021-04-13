@@ -13,16 +13,17 @@ SDL_Rect pos;
 SDL_Rect animFrame;
 int direction;
 int state;
+SDL_Rect posscreen;
 }enemie;
 
 
 
-void initEnnemi(Ennemi *e);
-void afficherEnnemie (Ennemi e,SDL_Surface *screen);
-void animerEnnemi(Ennemi *e);
-void deplacer(Ennemi *e);//deplacement aleatoire
-int collisionBB(personne p,Ennemi e);
-void deplacerIA(Ennemi *e);
+void initEnnemi(enemie *e);
+void afficherEnnemie (enemie e,SDL_Surface *screen);
+void animerEnnemi(enemie *e);
+void deplacer(enemie *e);//deplacement aleatoire
+/*int collisionBB(enemie p,enemie e);
+void deplacerIA(enemie *e);*/
 
 
 #endif
