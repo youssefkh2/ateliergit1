@@ -6,11 +6,7 @@
 #include <SDL/SDL_ttf.h>
 #include <SDL/SDL_image.h>
  
-/*#define initPerso
-#define afficherPerso
-#define saut
-#define movePerso 
-#define animerPerso*/
+
 
 
 int main()
@@ -52,25 +48,25 @@ background=IMG_Load("background.png");
         printf("Unable to load bitmap: %s\n",SDL_GetError());
         return 1;
     }
-    SDL_BlitSurface(background,NULL,screen,&positionecran);
-      SDL_Flip(screen);   
-    positionecran.x=-750;
-    positionecran.y=-500;
+     
+    positionecran.x=-400;
+    positionecran.y=-100;
     positionecran.w=background->w;
-    do
+   initPerso(&p);
+     
+    while(test==0)
     {
-         SDL_BlitSurface(background,NULL,screen,&positionecran);
-        i=p.ligne;
-        j=p.colonne;
+        
         t_prev=SDL_GetTicks();	//au début de la boucle de jeu
-        initPerso(&p);
-        /*switch(niveau)
-        {
-        case 'P':*/
-            afficherPerso( p, screen,police);
+        
+       
+          SDL_BlitSurface(background,NULL,screen,&positionecran);
+           afficherPerso( p, screen,police);
+            
+          
            if(p.vitesse>0)
          p.acceleration=-0.001;
-         j++;
+         p.colonne++;
           if(p.vitesse<0)
         
             p.acceleration=0;
@@ -84,12 +80,18 @@ background=IMG_Load("background.png");
                 switch (event.type)
                 {
                 case SDL_KEYDOWN:
-                    //deplacement du clavier down
-                    if(j==3)
-                        j=0;
+                   { //deplacement du clavier down
+                   
+                      if(event.key.keysym.sym==SDLK_ESCAPE)
+                    {
+
+                       test=1;
+                      break;
+
+                      }
                     if(event.key.keysym.sym==SDLK_RIGHT)
                     {
-                        i=0;
+                        p.ligne=0;
                          p.acceleration+=0.005;
                          
               
@@ -100,55 +102,53 @@ background=IMG_Load("background.png");
                    
                     else if(event.key.keysym.sym==SDLK_LEFT)
                     {
-                        i=1;
+                        p.ligne=1;
                          p.acceleration-=0.01;
-                        if(p.vitesse<0)
-                        { p.ligne=1;
-                        p.colonne=0;}
+                       
 
                     }//fin if
 
-                    else if(event.key.keysym.sym==SDLK_UP)
+                   /* else if(event.key.keysym.sym==SDLK_UP)
                     {
                        saut(& p, dt, p.posP.y);
 
 
-                     }
+                     }*/
                    
               
-
+                     
                     movePerso(&p, dt) ;
-                    animerPerso (& p);
+                   animerPerso (& p);
+                   
+                    }
                     break;
 
                 case SDL_KEYUP:
-                    
-                    if(event.key.keysym.sym==SDLK_RIGHT)
+                   { 
+                    if(event.key.keysym.sym==SDLK_DOWN)
                     {
-                        i=0;
+                        p.ligne=0;
                         p.acceleration-=0.001;
                     }
-                     
+                      
                       movePerso(&p, dt) ;
-                    animerPerso (& p);
+                   animerPerso (& p);
+                    
+                    
                    
-                   
+                  
                    SDL_Flip(screen);
-                   
-
+                    }
                     break;
 }///switch thenia
-                    /*break;
+                    
 
-                case 'o':
-                    break;
+                
 
-                case 'e' :
-                    test=1;
-                    break;*/
+                
 
                 }//fin while
-//}///fin switch loula
+
 
 
 
@@ -158,9 +158,9 @@ background=IMG_Load("background.png");
 
 
                 dt=SDL_GetTicks()-t_prev;	//à la fin de la boucle de jeu
-           /* if(1000/FPS > dt)
+          /* if(1000/FPS > dt)
             SDL_Delay(1000/FPS -dt);*/
-            }while(test=1);
+            };
 //fin bloucle do
                 SDL_FreeSurface(p.imageP[0][0]);
            
