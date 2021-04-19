@@ -19,8 +19,8 @@ void initPerso(Personne *p)
     p->imageP[2][1]=IMG_Load("7.png");
     p->imageP[2][2]=IMG_Load("8.png");
    
-    p->posP.x=0;
-    p->posP.y=100;
+    p->posP.x=50;
+    p->posP.y=50;
     p->imgVie[0]=IMG_Load("vie3.png");
     p->imgVie[1]=IMG_Load("vie2.png");
     p->imgVie[2]=IMG_Load("vie1.png");
@@ -46,11 +46,11 @@ SDL_Rect positiontexte;
 	char ch[10];
     SDL_BlitSurface(p.imageP[p.ligne][p.colonne],NULL,screen,&p.posP);
     SDL_BlitSurface(p.imgVie[p.numvie],NULL,screen,&p.posV);
-SDL_Flip(screen);
+//SDL_Flip(screen);
     sprintf(ch, "score= %d ",p.score);
     texte = TTF_RenderText_Blended(police, ch , couleur);
-    positiontexte.x = 500;
-    positiontexte.y =100;
+    positiontexte.x =-500;
+    positiontexte.y =-200;
    
 
 
@@ -58,24 +58,23 @@ SDL_Flip(screen);
 }
 void movePerso(Personne *p,Uint32 dt)
 {
-    int i,j;
-    i=p->ligne;
-    j=p->colonne;
+   p->ligne;
+    p->colonne;
 
 
 
     //deplacement du clavier down
-    if(i==0)
+    if(p->ligne==0)
     {    p->vitesse+=p->acceleration*dt;
         p->posP.x+=0.5*p->acceleration*dt*dt+p->vitesse*dt;
-      
+     
         
 
     }//fin if
 
     
-    else if(i==1)
-    { p->vitesse+=p->acceleration*dt;
+    else if(p->ligne==1)
+    { p->vitesse-=p->acceleration*dt;
         p->posP.x-=0.5*p->acceleration*dt*dt+p->vitesse*dt;
     
     }//fin if
@@ -95,7 +94,7 @@ void animerPerso(Personne* p)
 { if(p->colonne==3)
   p->colonne=0;
 else
-p->colonne++;
+p->colonne+=1;
 
 }
 void saut(Personne* p,int dt,int posinit)
@@ -104,7 +103,7 @@ if(p->posP.y==40)
 {
 p->posP.y-=10;
  if(p->posP.y!=posinit)
-p->posP.x=0.5*p->acceleration*dt*dt+p->vitesse*dt;
+p->posP.y=0.5*p->acceleration*dt*dt+p->vitesse*dt;
 }///fin if
 if(p->posP.y==posinit)
 p->up=0;
