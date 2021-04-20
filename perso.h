@@ -21,6 +21,7 @@ double vitesse, acceleration;
 
 
 void initPerso(Personne *p);
+void initPerso1(Personne *p);
 void afficherPerso(Personne p, SDL_Surface * screen, TTF_Font *police);
 void movePerso(Personne *p,Uint32 dt) ;
 void animerPerso (Personne* p);
