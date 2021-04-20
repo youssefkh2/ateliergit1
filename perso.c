@@ -36,6 +36,36 @@ void initPerso(Personne *p)
     p->up=0;
 
 }
+void initPerso1(Personne *p)
+{
+    int x,y;
+    p->imageP[0][0] =IMG_Load("00.png");//right
+    p->imageP[0][1]=IMG_Load("11.png");
+    p->imageP[0][2]=IMG_Load("22.png");
+    p->imageP[1][0]=IMG_Load("33.png");//left
+    p->imageP[1][1]=IMG_Load("44.png");
+    p->imageP[1][2]=IMG_Load("55.png");
+    p->imageP[2][0]=IMG_Load("66.png");//lfouk
+    p->imageP[2][1]=IMG_Load("77.png");
+    p->imageP[2][2]=IMG_Load("88.png");
+   
+    p->posP.x=500;
+    p->posP.y=500;
+    p->imgVie[0]=IMG_Load("vie3.png");
+    p->imgVie[1]=IMG_Load("vie2.png");
+    p->imgVie[2]=IMG_Load("vie1.png");
+    p->imgVie[3]=IMG_Load("vie0.png");
+    p->posV.x=200;
+    p->posV.y=0;
+    p->score=0;
+    p->numvie=0;
+    p->ligne=0;
+    p->colonne=0;
+    p->vitesse=5;
+    p->acceleration=0;
+    p->up=0;
+
+}
 
 void afficherPerso(Personne p, SDL_Surface * screen, TTF_Font *police)
 {//police
@@ -99,14 +129,18 @@ p->colonne+=1;
 }
 void saut(Personne* p,int dt,int posinit)
 {int x,y;
-if(p->posP.y==40)
+if(p->posP.y>=10)
 {
-p->posP.y-=10;
- if(p->posP.y!=posinit)
-p->posP.y=0.5*p->acceleration*dt*dt+p->vitesse*dt;
-}///fin if
+p->posP.y-=1;
+ p->posP.y-=0.5*p->acceleration*dt*dt+p->vitesse*dt;}
+ else 
+{p->posP.y+=1;
+p->posP.y=0.5*p->acceleration*dt*dt+p->vitesse*dt;}
+
+
 if(p->posP.y==posinit)
 p->up=0;
+
 }
 
 
