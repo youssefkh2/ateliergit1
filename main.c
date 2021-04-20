@@ -9,7 +9,6 @@ int main (int argc, char *argv[])
 background b;
 SDL_Event event;
 SDL_Surface *screen;
-   perso p ; 
 
 
 if (SDL_Init (SDL_INIT_VIDEO) == -1) {
@@ -35,24 +34,23 @@ while (!continuer) {
 break;
  case SDL_KEYDOWN:
  switch (event.key.keysym.sym)
- {
- case SDLK_LEFT:
+ {  
+case SDLK_LEFT:
 direction=1;
-scroll(&b.pos,direction);
+scroll(&b.pos_camera,direction);
 break;
  case SDLK_RIGHT:
 direction=0 ;
-scroll(&b.pos,direction);
+scroll(&b.pos_camera,direction);
 break;
 case SDLK_UP:
 direction=2 ;
-scroll(&b.pos,direction);
+scroll(&b.pos_camera,direction);
 break;
 case SDLK_DOWN:
 direction=3 ;
-scroll(&b.pos,direction);
+scroll(&b.pos_camera,direction);
 break;
-
 
   }
     break;
@@ -61,5 +59,5 @@ break;
 afficher_background (screen,&b);
 SDL_Flip (screen);
 }
-SDL_FreeSurface(screen);
-SDL_FreeSurface(b.background);} 
+   SDL_FreeSurface(screen);
+SDL_FreeSurface(b.background);}
