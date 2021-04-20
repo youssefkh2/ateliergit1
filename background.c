@@ -29,33 +29,20 @@ b->pos_camera.h=CAMERA_H;
 void afficher_background (SDL_Surface *screen,background *b)
 {
 SDL_BlitSurface(b->background,&b->pos_camera,screen,&b->pos);
+/*SDL_BlitSurface(&b->pos_camera,screen,&b->pos,NULL);*/
 }
-
-
 
 void scroll (SDL_Rect *back, int direction)
-{ background *b ; 
-if (direction=0)
-b->pos_camera.x++ ;
+{  
+if (direction==0)
+back->x++ ;
 else 
-if (direction=1)
-b->pos_camera.x-- ;
+if (direction==1)
+back->x-- ;
 else 
-if (direction=2)
-b->pos_camera.y++ ;
+if (direction==2)
+back->y++ ;
 else 
-if (direction=3)
-b->pos_camera.y-- ;
+if (direction==3)
+back->y-- ;
 }
-
-
-
-
-
-
-
-
-
-
-
-
