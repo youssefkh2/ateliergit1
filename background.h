@@ -1,9 +1,3 @@
-#ifndef background_H_INCLUDED
-#define background_H_INCLUDED
-#define CAMERA_W 811  
-#define CAMERA_H 555
-
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <SDL/SDL.h>
@@ -29,4 +23,3 @@ void scroll (SDL_Rect * back, int direction );
 
 
  #endif	
-
