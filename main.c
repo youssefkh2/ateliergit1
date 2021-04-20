@@ -12,7 +12,7 @@
 int main()
 {
     Uint32 dt, t_prev;
-    Personne p;
+    Personne p,p1;
     int i,j=0;
     int x,y;
      int test=0;
@@ -53,7 +53,7 @@ background=IMG_Load("background.png");
     positionecran.y=-100;
     positionecran.w=background->w;
    initPerso(&p);
-     
+    // initPerso(&p1);
     while(test==0)
     {
         
@@ -108,12 +108,12 @@ background=IMG_Load("background.png");
 
                     }//fin if
 
-                   /* else if(event.key.keysym.sym==SDLK_UP)
+                   else if(event.key.keysym.sym==SDLK_UP)
                     {
                        saut(& p, dt, p.posP.y);
 
 
-                     }*/
+                     }
                    
               
                      
