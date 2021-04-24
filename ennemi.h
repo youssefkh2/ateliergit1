@@ -6,13 +6,14 @@
 #include <SDL/SDL_image.h>
 #include "ennemi.h"
 
+typedef enum state state;
+enum state{waiting,following,attacking};
 typedef struct enemie
 {
 SDL_Surface *img;
-SDL_Rect pos;
 SDL_Rect animFrame;
 int direction;
-int state;
+state state;
 SDL_Rect posscreen;
 }enemie;
 
@@ -22,8 +23,8 @@ void initEnnemi(enemie *e);
 void afficherEnnemie (enemie e,SDL_Surface *screen);
 void animerEnnemi(enemie *e);
 void deplacer(enemie *e);//deplacement aleatoire
-/*int collisionBB(enemie p,enemie e);
-void deplacerIA(enemie *e);*/
+int collisionBB(enemie *p,enemie *e);
+/*void deplacerIA(enemie *e);*/
 
 
 #endif
